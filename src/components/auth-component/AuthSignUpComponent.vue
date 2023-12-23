@@ -53,7 +53,10 @@
 </template>
 
 <script>
-    import environment from "../../environment";
+    import serviceHttp from "@/services/service-http";
+    import environment from "@/environment";
+
+    const { http } = serviceHttp();
 
     export default {
         name: "AuthSignUpComponent",
@@ -70,34 +73,18 @@
         },
         methods: {
             async signup() {
-                try {
-                    let url = `${environment.api.url}${environment.api.access.signup}`;
-                    let res = await fetch(url, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            fullName: this.form.fullName,
-                            email: this.form.email,
-                            password: this.form.password,
-                            phone: this.form.phone,
-                            addess: this.form.address
-                        })
-                    })
-
-                    if(!res.ok) {
-                        let resp = await res.json();
-                        throw new Error(resp.message);
+                this.$store.commit('toggleLoader');
+                let url = `${environment.api.url}${environment.api.access.signup}`;
+                await http(url, "POST", this.form, (information) => {
+                    let { status, metadata} = information;
+                    if(status) {
+                        this.$store.commit('signin', metadata);
+                        this.$store.commit('toggleLoader');
+                        this.$router.push("/");
                     }
+                })
 
-                    let data = await res.json();
-                    console.log(data);
-
-                } catch (error) {
-                    console.log(error);
-                    throw error;
-                }
+                console.log(this.form);
             }
         }
     }

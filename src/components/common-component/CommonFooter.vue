@@ -43,12 +43,18 @@
             </div>
         </div>
         <p class="footer-copplyright">&copy; coppy right by duy366110@gmail.com</p>
+        <CommonLoaderComponent />
     </footer>
 </template>
 
 <script>
+    import CommonLoaderComponent from "../common-component/CommonLoader.vue"
+
     export default {
-        name: "CommonFooter"
+        name: "CommonFooter",
+        components: {
+            CommonLoaderComponent
+        }
     }
 </script>
 

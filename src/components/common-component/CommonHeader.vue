@@ -39,6 +39,7 @@
         name: "CommonHeader",
         methods: {
             async signout() {
+                this.$store.commit('toggleLoader');
                 let url = `${environment.api.url}${environment.api.access.signout}`;
                 let payload  = {
                     id: this.$store.state.auth._id,
@@ -51,6 +52,7 @@
 
                     if(status) {
                         this.$store.commit('signout');
+                        this.$store.commit('toggleLoader');
                         window.location.reload();
                     }
                 })

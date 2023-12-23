@@ -17,6 +17,9 @@ export default createStore({
       address: "",
       accessToken: "",
       refreshToken: ""
+    },
+    loader: {
+      status: false
     }
   },
   getters: {
@@ -41,6 +44,10 @@ export default createStore({
       Object.keys(state.auth).forEach((key) => {
         state.auth[key] = payload[key];
       })
+    },
+    // LOADER
+    toggleLoader(state) {
+      state.loader.status = !state.loader.status;
     }
   },
   actions: {

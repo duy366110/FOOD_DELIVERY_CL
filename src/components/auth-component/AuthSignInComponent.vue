@@ -52,12 +52,13 @@
         },
         methods: {
             async signin() {
-
+                this.$store.commit('toggleLoader');
                 let url = `${environment.api.url}${environment.api.access.signin}`;
                 await http(url, "POST", this.form, (information) => {
                     let { status, metadata} = information;
                     if(status) {
                         this.$store.commit('signin', metadata);
+                        this.$store.commit('toggleLoader');
                         this.$router.push("/");
                     }
                 })

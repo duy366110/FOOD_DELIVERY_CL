@@ -18,6 +18,7 @@
 <style>
   :root {
     --first-text-color: #333333;
+    --text-color-active: #7f7f7f;
   }
 
   html, body {
@@ -28,6 +29,7 @@
     text-align: center;
     color: #2c3e50;
     font-size: 10px;
+    scroll-behavior: smooth;
   }
 
   a:hover {

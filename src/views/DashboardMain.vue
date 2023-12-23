@@ -1,7 +1,9 @@
 <template>
-    <CommonHeader />
-    <router-view />
-    <CommonFooter />
+    <div class="dashboard-main-component">
+        <CommonHeader />
+        <router-view />
+        <CommonFooter />
+    </div>
 </template>
 
 <script>
@@ -13,6 +15,18 @@
         components: {
             CommonHeader,
             CommonFooter
+        },
+        mounted() {
+            window.addEventListener('scroll', this.onScrollHandler)
+        },
+        methods: {
+            onScrollHandler() {
+                if(window.scrollY > 250 && !this.$store?.header?.status) {
+                    this.$store.commit('toggleHeader', true);
+                } else {
+                    this.$store.commit('toggleHeader', false);
+                }
+            }
         }
     }
 </script>

@@ -20,6 +20,9 @@ export default createStore({
     },
     loader: {
       status: false
+    },
+    header: {
+      status: false
     }
   },
   getters: {
@@ -48,6 +51,10 @@ export default createStore({
     // LOADER
     toggleLoader(state) {
       state.loader.status = !state.loader.status;
+    },
+    // HEADER
+    toggleHeader(state, payload) {
+      state.header.status = payload;
     }
   },
   actions: {

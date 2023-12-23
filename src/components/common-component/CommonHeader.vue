@@ -1,5 +1,5 @@
 <template>
-    <header class="common-header-component">
+    <header class="common-header-component" :class="{'active': $store.state?.header?.status}">
         <div class="header-wrapper">
             <div class="container-fluid">
                 <div class="row">
@@ -68,9 +68,15 @@
         left: 0px;
         height: 50px;
         position: fixed;
+        transition: all .5s ease;
         top: 0px;
         width: 100%;
         z-index: 1000;
+    }
+
+    .active {
+        background-color: #ffffff;
+        box-shadow: 0px 0px 5px 1px #0000006b;
     }
 
     .header-wrapper {
@@ -89,6 +95,10 @@
         text-transform: capitalize;
     }
 
+    .active .header-logo a {
+        color: var(--text-color-active);
+    }
+
     /** HEADER LIST */
     .header-list {
         display: flex;
@@ -105,6 +115,10 @@
         font-weight: 600;
         letter-spacing: .5px;
         text-transform: uppercase;
+    }
+
+    .active .header-list li a {
+        color: var(--text-color-active);
     }
 
 

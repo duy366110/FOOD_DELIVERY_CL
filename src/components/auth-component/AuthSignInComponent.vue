@@ -8,14 +8,24 @@
         </h2>
 
         <div class="form-group">
-            <label class="form-label" for="exampleInputEmail1">E-mail</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <label class="form-label" for="user-email">E-mail</label>
+            <input
+                type="email"
+                class="form-control"
+                id="user-email"
+                v-model="form.email"/>
         </div>
 
         <div class="form-group">
-            <label class="form-label" for="exampleInputPassword1">Mật khẩu</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
+            <label class="form-label" for="user-password">Mật khẩu</label>
+            <input
+                type="password"
+                class="form-control"
+                id="user-password"
+                v-model="form.password"/>
         </div>
+
+        <p>{{$store.state.auth.email}}</p>
 
         <button type="submit" class="btn w-100 btn-custom">Đăng nhập</button>
         <p class="form-sugget"><span>Bạn chưa có tài khoản?</span> <router-link to="/auth/signup">đăng ký</router-link></p>
@@ -25,7 +35,10 @@
 </template>
 
 <script>
-    import enviroment from "../../environment";
+    import serviceHttp from "@/services/service-http";
+    import environment from "@/environment";
+
+    const { http } = serviceHttp();
 
     export default {
         name: "AuthSignInComponent",
@@ -39,28 +52,15 @@
         },
         methods: {
             async signin() {
-                try {
-                    console.log("User signin");
-                    let res = await fetch(`${enviroment.api.url}/access/signin`, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({email: "", password: ""})
-                    });
 
-                    if(!res.ok) {
-                        let resp = await res.json()
-                        throw new Error(resp?.message);
+                let url = `${environment.api.url}${environment.api.access.signin}`;
+                await http(url, "POST", this.form, (information) => {
+                    let { status, metadata} = information;
+                    if(status) {
+                        this.$store.commit('signin', metadata);
+                        this.$router.push("/");
                     }
-
-                    let data = await res.json();
-                    console.log(data);
-
-                } catch (error) {
-                    console.log(error);
-                    // throw error;
-                }
+                })
             }
         }
     }

@@ -2,6 +2,19 @@
   <router-view/>
 </template>
 
+<script>
+  export default {
+    name: "app-component",
+    mounted() {
+      
+      let user = localStorage.getItem('user');
+      if(!this.$store.state.auth.accessToken && user) {
+        this.$store.commit('reload', JSON.parse(user));
+      }
+    }
+  }
+</script>
+
 <style>
   :root {
     --first-text-color: #333333;

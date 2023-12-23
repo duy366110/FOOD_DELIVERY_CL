@@ -10,6 +10,7 @@ export default createStore({
       }
     },
     auth: {
+      _id: "",
       fullName: "",
       email: "",
       phone: "",
@@ -21,6 +22,26 @@ export default createStore({
   getters: {
   },
   mutations: {
+    signin(state, payload) {
+      Object.keys(state.auth).forEach((key) => {
+        state.auth[key] = payload.user[key];
+      })
+
+      state.auth.accessToken = payload.accessToken;
+      state.auth.refreshToken = payload.refreshToken;
+      localStorage.setItem("user", JSON.stringify(state.auth));
+    },
+    signout(state) {
+      localStorage.clear();
+      Object.keys(state.auth).forEach((key) => {
+        state.auth[key] = "";
+      })
+    },
+    reload(state, payload) {
+      Object.keys(state.auth).forEach((key) => {
+        state.auth[key] = payload[key];
+      })
+    }
   },
   actions: {
   },

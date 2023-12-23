@@ -17,7 +17,9 @@
 
                         <ul class="header-list">                            
                             <li v-if="!$store.state.auth.accessToken"><router-link to="/auth">Đăng nhập</router-link></li>
-                            <li v-if="$store.state.auth.accessToken"><router-link to="">Đăng xuất</router-link></li>
+                            <li v-if="$store.state.auth.accessToken">
+                                <router-link to="" @click="signout">Đăng xuất</router-link>
+                            </li>
                             <li v-if="!$store.state.auth.accessToken"><router-link to="/auth/signup">Đăng ký</router-link></li>
                         </ul>
 
@@ -29,8 +31,31 @@
 </template>
 
 <script>
+    import serviceHttp from '@/services/service-http';
+    import environment from '@/environment';
+    const { http } = serviceHttp();
+
     export default {
-        name: "CommonHeader"
+        name: "CommonHeader",
+        methods: {
+            async signout() {
+                let url = `${environment.api.url}${environment.api.access.signout}`;
+                let payload  = {
+                    id: this.$store.state.auth._id,
+                    accessToken: this.$store.state.auth.accessToken,
+                    refreshToken: this.$store.state.auth.refreshToken
+                }
+
+                await http(url, "POST", payload, (information) => {
+                    let { status} = information;
+
+                    if(status) {
+                        this.$store.commit('signout');
+                        window.location.reload();
+                    }
+                })
+            }
+        }
     }
 </script>
 

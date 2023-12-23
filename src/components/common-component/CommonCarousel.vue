@@ -44,6 +44,6 @@
 <style scoped>
     .carousel-bg {
         filter: brightness(0.95);
-        height: 720px;
+        height: 845px;
     }
 </style>

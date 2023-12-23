@@ -6,6 +6,7 @@ const environment = {
             access: {
                 signin: "common/access/signin",
                 signout: "common/access/signout",
+                signup: "common/access/signup",
             }
         }
     },
@@ -15,6 +16,7 @@ const environment = {
             access: {
                 signin: "common/access/signin",
                 signout: "common/access/signout",
+                signup: "common/access/signup",
             }
         }
     }

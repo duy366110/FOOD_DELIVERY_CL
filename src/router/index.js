@@ -3,6 +3,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 // DASHBOARD
 const DashboardComponent = () => import("../components/dashboard-component/DashboardComponent.vue");
 const DashboardMainComponent = () => import("../components/dashboard-component/DashboardMainComponent.vue");
+const DashboardMenuComponent = () => import("../components/dashboard-component/DashboardMenuComponent.vue");
+const DashboardAboutComponent = () => import("../components/dashboard-component/DashboardAboutComponent.vue");
 
 // AUTH
 const AuthComponent = () => import("../components/auth-component/AuthComponent.vue");
@@ -24,6 +26,16 @@ const routes = [
             path: "",
             name: "dashboard-main",
             component: DashboardMainComponent
+          },
+          {
+            path: "about",
+            name: "about",
+            component: DashboardAboutComponent
+          },
+          {
+            path: "menu",
+            name: "menu",
+            component: DashboardMenuComponent
           }
         ]
       }

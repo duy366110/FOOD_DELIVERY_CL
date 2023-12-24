@@ -13,7 +13,7 @@
                             <li><router-link to="/about">Giới thiệu</router-link></li>
                             <li><router-link to="/menu">Thực đơn</router-link></li>
                             <li v-if="$store.state.auth.accessToken">
-                                <router-link to="/booking">Đặt bàn</router-link>
+                                <router-link to="/order">Delivery</router-link>
                             </li>
                         </ul>
 

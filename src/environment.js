@@ -10,6 +10,7 @@ const environment = {
                 root: "dish",
             },
             order: {
+                root: "order",
                 dish: "order/dish",
             },
             access: {
@@ -29,6 +30,7 @@ const environment = {
                 root: "dish",
             },
             order: {
+                root: "order",
                 dish: "order/dish",
             },
             access: {

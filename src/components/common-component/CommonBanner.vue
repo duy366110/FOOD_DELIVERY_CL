@@ -18,6 +18,8 @@
                 this.title = "Thực đơn";
             } else if(this.$route.path.includes('/dish')) {
                 this.title = "Món ăn";
+            } else if(this.$route.path.includes('/order')) {
+                this.title = "Delivery";
             } else {
                 this.title = "Giới thiệu";
             }

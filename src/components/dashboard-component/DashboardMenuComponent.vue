@@ -31,13 +31,14 @@
         </div>
 
         <div class="container-fluid" v-if="categories.length <= 0">
-            <h2 class="blank-title">Danh mục menu chưa cập nhật</h2>
+            <CommonBlankMessage :message="'Danh mục menu chưa cập nhật'" />
         </div>
     </div>
 </template>
 
 <script>
     import CommonBanner from "../common-component/CommonBanner.vue";
+    import CommonBlankMessage from "../common-component/CommonBlankMessage.vue";
     import serviceHttp from "@/services/service-http";
     import environment from "@/environment";
 
@@ -46,7 +47,8 @@
     export default {
         name: "DashboardMenuComponent",
         components: {
-            CommonBanner
+            CommonBanner,
+            CommonBlankMessage
         },
         data() {
             return {
@@ -139,9 +141,9 @@
         text-transform: uppercase;
     }
 
-    .blank-title {
+    /* .blank-title {
         font-size: 2.5rem;
         text-align: center;
         text-transform: capitalize;
-    }
+    } */
 </style>

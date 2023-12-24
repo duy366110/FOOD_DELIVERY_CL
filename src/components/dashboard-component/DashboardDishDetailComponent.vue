@@ -77,6 +77,7 @@
                         console.log(information);
                         if(status) {
                             this.$store.commit('toggleLoader');
+                            this.$router.push("/order");
                         }
                     })
 

@@ -3,6 +3,9 @@ const environment = {
     dev: {
         api: {
             url: "http://localhost:8080/v1/api/",
+            category: {
+                root: "category",
+            },
             access: {
                 signin: "common/access/signin",
                 signout: "common/access/signout",
@@ -13,6 +16,9 @@ const environment = {
     pro: {
         api: {
             url: "https://food-delivery-53se.onrender.com/v1/api/",
+            category: {
+                root: "category",
+            },
             access: {
                 signin: "common/access/signin",
                 signout: "common/access/signout",

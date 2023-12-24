@@ -14,7 +14,7 @@
                     <div class="col-6">
                         <div class="row">
                             <div class="col-12" v-for="dish in category.dishs" :key="dish._id">
-                                <router-link :to="'/dish/'+dish._id" class="menu-dish-wrapper">
+                                <router-link :to="'/dish/'+dish._id" class="menu-dish">
                                     <div class="menu-dish-infor">
                                         <img :src="dish.thumbs[0]" alt="thumbs" />
                                         <div class="menu-dish-infor-wrapper">
@@ -86,6 +86,7 @@
 
     .menu-banner img {
         filter: brightness(0.95);
+        width: 100%;
     }
 
     .menu-banner .menu-banner-title {
@@ -101,12 +102,7 @@
     }
 
     /** MENU */
-    .menu-element-wrapper img {
-        height: 100%;
-        width: 100%;
-    }
-
-    .menu-dish-wrapper {
+    .menu-dish {
         color: var(--first-text-color);
         display: flex;
         align-items: center;

@@ -7,7 +7,10 @@ const environment = {
                 root: "category",
             },
             dish: {
-                root: "dish"
+                root: "dish",
+            },
+            order: {
+                dish: "order/dish",
             },
             access: {
                 signin: "common/access/signin",
@@ -23,7 +26,10 @@ const environment = {
                 root: "category",
             },
             dish: {
-                root: "dish"
+                root: "dish",
+            },
+            order: {
+                dish: "order/dish",
             },
             access: {
                 signin: "common/access/signin",

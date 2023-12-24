@@ -14,17 +14,12 @@
             }
         },
         mounted() {
-            console.log(this.$route.path);
-            
-            switch(this.$route.path) {
-                case "/menu":
-                    this.title = "Thực đơn"
-                    break
-
-                case "/about":
-                default: 
-                    this.title = "Giới thiệu"
-                    break
+            if(this.$route.path.includes('/menu')) {
+                this.title = "Thực đơn";
+            } else if(this.$route.path.includes('/dish')) {
+                this.title = "Món ăn";
+            } else {
+                this.title = "Giới thiệu";
             }
         }
     }

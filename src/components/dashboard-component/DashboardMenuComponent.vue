@@ -6,20 +6,23 @@
             <div class="menu-element-wrapper py-5" v-for="(category, index) in categories" :key="category._id">
                 <div class="row" :class="{'wrapper-reverse': 2 % index == 0}">
                     <div class="col-6">
-                        <img :src="category.thumbs[0]" alt="thumbnail" />
+                        <div class="menu-banner">
+                            <img :src="category.thumbs[0]" alt="thumbnail" />
+                            <h2 class="menu-banner-title">{{ category.title }}</h2>
+                        </div>
                     </div>
                     <div class="col-6">
                         <div class="row">
-                            <div class="col-6" v-for="dish in category.dishs" :key="dish._id">
-                                <div class="menu-dish-wrapper">
-                                    <div class="menu-dish-thumbnail">
-                                        <img :src="dish.thumbs[0]" alt="thumbs" />
-                                    </div>
+                            <div class="col-12" v-for="dish in category.dishs" :key="dish._id">
+                                <router-link :to="'/dish/'+dish._id" class="menu-dish-wrapper">
                                     <div class="menu-dish-infor">
-                                        <h3 class="menu-dish-infor-title">{{ dish.title }}</h3>
-                                        <h4 class="menu-dish-price">{{ dish.price.$numberDecimal }}</h4>
+                                        <img :src="dish.thumbs[0]" alt="thumbs" />
+                                        <div class="menu-dish-infor-wrapper">
+                                            <h3 class="menu-dish-title">{{ dish.title }}</h3>
+                                        </div>
                                     </div>
-                                </div>
+                                    <h4 class="menu-dish-price">{{ dish.price.$numberDecimal }} VND</h4>
+                                </router-link>
                             </div>
                         </div>
                     </div>
@@ -47,7 +50,7 @@
         },
         data() {
             return {
-                banner: "linear-gradient(to right, rgb(0 0 0 / 50%), rgb(0 0 0 / 50%)), url('/assets/images/banner/banner_menu.jpg')",
+                banner: "linear-gradient(to right, rgb(0 0 0 / 35%), rgb(0 0 0 / 35%)), url('/assets/images/banner/banner_menu.jpg')",
                 categories: [],
             }
         },
@@ -75,20 +78,69 @@
     .wrapper-reverse {
         flex-direction: row-reverse;
     }
+
+    /** BANNER */
+    .menu-banner {
+        position: relative;
+    }
+
+    .menu-banner img {
+        filter: brightness(0.95);
+    }
+
+    .menu-banner .menu-banner-title {
+        color: #ffffff;
+        font-size: 3.5rem;
+        font-weight: 700;
+        letter-spacing: .3px;
+        left: 50%;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        z-index: 1;
+    }
+
+    /** MENU */
     .menu-element-wrapper img {
         height: 100%;
         width: 100%;
     }
 
     .menu-dish-wrapper {
+        color: var(--first-text-color);
         display: flex;
         align-items: center;
-        gap: 1rem;
+        justify-content: space-between;
+    }
+    .menu-dish-infor {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: calc(100% - 25%);
     }
 
-    .menu-dish-thumbnail img {
+    .menu-dish-infor img {
         border-radius: 50%;
         width: 70px;
+    }
+
+    .menu-dish-infor-wrapper {
+        width: 100%;
+    }
+    .menu-dish-infor-wrapper::after {
+        content: "";
+        border-bottom: 1px dotted #959595;
+        display: flex;
+        margin-top: 1rem;
+        width: 100%;
+    }
+
+    .menu-dish-price {
+        font-size: 1.8rem;
+        font-weight: 600;
+        letter-spacing: .3px;
+        margin-bottom: 0px;
+        text-transform: uppercase;
     }
 
     .blank-title {

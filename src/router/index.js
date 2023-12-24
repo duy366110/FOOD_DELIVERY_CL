@@ -5,6 +5,7 @@ const DashboardComponent = () => import("../components/dashboard-component/Dashb
 const DashboardMainComponent = () => import("../components/dashboard-component/DashboardMainComponent.vue");
 const DashboardMenuComponent = () => import("../components/dashboard-component/DashboardMenuComponent.vue");
 const DashboardAboutComponent = () => import("../components/dashboard-component/DashboardAboutComponent.vue");
+const DashboardDishDetailComponent = () => import("../components/dashboard-component/DashboardDishDetailComponent.vue");
 
 // AUTH
 const AuthComponent = () => import("../components/auth-component/AuthComponent.vue");
@@ -36,6 +37,11 @@ const routes = [
             path: "menu",
             name: "menu",
             component: DashboardMenuComponent
+          },
+          {
+            path: "dish/:id",
+            name: "dish-detail",
+            component: DashboardDishDetailComponent
           }
         ]
       }

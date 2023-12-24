@@ -6,6 +6,9 @@ const environment = {
             category: {
                 root: "category",
             },
+            dish: {
+                root: "dish"
+            },
             access: {
                 signin: "common/access/signin",
                 signout: "common/access/signout",
@@ -18,6 +21,9 @@ const environment = {
             url: "https://food-delivery-53se.onrender.com/v1/api/",
             category: {
                 root: "category",
+            },
+            dish: {
+                root: "dish"
             },
             access: {
                 signin: "common/access/signin",

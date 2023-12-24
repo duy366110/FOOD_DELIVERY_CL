@@ -14,7 +14,7 @@
         },
         data() {
             return {
-                banner: "linear-gradient(to right, rgb(0 0 0 / 50%), rgb(0 0 0 / 50%)), url('/assets/images/banner/banner_about.jpg')"
+                banner: "linear-gradient(to right, rgb(0 0 0 / 35%), rgb(0 0 0 / 35%)), url('/assets/images/banner/banner_about.jpg')"
             }
         }
     }

@@ -75,7 +75,7 @@
         },
         methods: {
             seeMenuHandler() {
-                console.log("User want to see menu");
+                this.$router.push('/menu');
             }
         }
     }

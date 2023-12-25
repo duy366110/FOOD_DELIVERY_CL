@@ -68,5 +68,7 @@
     .table-wrapper, th, td {
         border: 1px solid #dddddd;
         padding: 10px;
+        text-align: left;
     }
+
 </style>

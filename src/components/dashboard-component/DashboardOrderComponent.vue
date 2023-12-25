@@ -43,7 +43,7 @@
             if(this.$store.state.auth.accessToken) {
                 this.loadUserOrder();
             } else {
-                this.$router.push("/");
+                this.$router.push("/auth");
             }
         },
         methods: {
@@ -80,7 +80,7 @@
                     let { status} = information;
                     if(status) {
                         this.$store.commit('toggleLoader');
-                        window.location.reload();
+                        this.$router.push("/transaction");
                     }
                 })
             }

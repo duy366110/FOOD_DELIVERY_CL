@@ -94,6 +94,10 @@
         width: 100%;
     }
 
+    .dish-detail-infor {
+        text-align: left;
+    }
+
     .dish-detail-infor_title {
         font-size: 2.5rem;
         font-weight: 600;

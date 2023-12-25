@@ -123,6 +123,7 @@
     }
 
     .menu-dish-infor-wrapper {
+        text-align: left;
         width: 100%;
     }
     .menu-dish-infor-wrapper::after {
@@ -138,12 +139,7 @@
         font-weight: 600;
         letter-spacing: .3px;
         margin-bottom: 0px;
+        text-align: left;
         text-transform: uppercase;
     }
-
-    /* .blank-title {
-        font-size: 2.5rem;
-        text-align: center;
-        text-transform: capitalize;
-    } */
 </style>

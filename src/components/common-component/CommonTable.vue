@@ -38,8 +38,11 @@
                     <tr>
                         <td>Chức năng</td>
                         <td colspan="3">
-                            <button>Huỷ hoá đơn</button>
-                            <button>Thanh toán</button>
+                            <CommonButton
+                                @btnClick="onDangerHandler(data._id)"
+                                :type="'danger'"
+                                :title="'Huỷ hoá đơn'"/>
+                            <CommonButton :type="'primary'" :title="'Thanh toán'" />
                         </td>
                     </tr>
                 </tbody>
@@ -49,15 +52,24 @@
 </template>
 
 <script>
+    import CommonButton from "./CommonButton.vue";
 
     export default {
         name: 'CommonTable',
         props: ['type', 'data'],
+        components: {
+            CommonButton
+        },
         computed: {
             total() {
                 return this.data.orders.reduce((acc, order) => {
                     return acc += Number(order.dish.price.$numberDecimal) * Number(order.quantity);
                 }, 0).toFixed(3)
+            }
+        },
+        methods: {
+            onDangerHandler(event) {
+                this.$emit('onDangerHandler', event);
             }
         }
     }

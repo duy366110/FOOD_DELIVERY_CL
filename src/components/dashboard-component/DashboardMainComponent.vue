@@ -22,7 +22,7 @@
             <div class="main-menu-wrapper">
                 <h3 class="menu-wrapper-title">ẨM THỰC DÌ MAI - ẤM ÁP GẦN GŨI NHƯ HƯƠNG VỊ BẾP NHÀ</h3>
                 <p class="menu-wrapper-des">Đến với Dì Mai, thực khách luôn được chào đón một cách nhiệt tình và cảm nhận được không khí gia đình vào mọi thời điểm, từ món điểm tâm, các món ăn nhẹ trong ngày, hay bữa tối với bạn bè, gia đình hoặc chỉ đơn giản là một thức uống nhẹ ở khu vực sân ngoài trời.</p>
-                <CommonButtonComponent @btnClick="seeMenuHandler" :title="'Xem thực đơn'" />
+                <CommonButtonComponent :type="'normal'" @btnClick="seeMenuHandler" :title="'Xem thực đơn'" />
             </div>
         </div>
     </div>

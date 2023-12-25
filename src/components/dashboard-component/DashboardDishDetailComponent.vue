@@ -16,7 +16,7 @@
                                 <span>Đơn giá:</span>
                                 <span>{{ dish.price?.$numberDecimal }} VND</span>
                             </h3>
-                            <CommonButton :title="'Thêm vào hoá đơn'" @btnClick="addDishToOrder" />
+                            <CommonButton :type="'primary'" :title="'Thêm vào hoá đơn'" @btnClick="addDishToOrder" />
                         </div>
                     </div>
                 </div>

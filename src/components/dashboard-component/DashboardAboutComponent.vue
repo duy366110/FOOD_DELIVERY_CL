@@ -1,9 +1,9 @@
 <template>
     <div class="dashboard-about-component">
         <CommonBanner :banner="banner" />
-        <div class="container pt-5">
-            <div class="about-desc">
-                <h2 class="about-desc-title">Câu chuyện về Foođelivery</h2>
+        <div class="container pt-5 mt-5">
+            <div class="container-wrapper bg-gray">
+                <h2 class="container-title">Câu chuyện về FooDelivery</h2>
                 <p>Chào mừng bạn đến với FoodDelivery, nơi trái tim Việt Nam gặp gỡ với vẻ đẹp của bờ sông. Nhấn chìm trong không gian yên bình, nhà hàng chúng tôi là thiên đường ẩm thực hứa hẹn mang đến trải nghiệm ẩm thực Việt Nam độc đáo.</p>
                 <p>Bước vào không khí tinh tế kết hợp hài hòa giữa sự thanh lịch hiện đại và dải văn hóa phong phú của Việt Nam. Trang trí phản ánh sự ấm cúng và chân thành của lòng hiếu khách Việt Nam, tạo ra không gian mời gọi cho cả những buổi họp mặt riêng tư và những bữa tiệc sôi động.</p>
                 <p>Tại FoodDelivery, chúng tôi tự hào mang đến thực đơn phản ánh hương vị phong phú và những truyền thống ẩm thực đa dạng của Việt Nam. Đầu bếp tài năng của chúng tôi tận tâm chuẩn bị từng món ăn, sử dụng chỉ những nguyên liệu tốt nhất để ghi chép bản hòa âm của ẩm thực Việt Nam. Từ thảo mộc thơm ngát của Hà Nội đến gia vị đậm đà của Sài Gòn, mỗi miếng ăn là một hành trình qua cảnh vật ẩm thực của đất nước đẹp này.</p>
@@ -32,24 +32,14 @@
 </script>
 
 <style scoped>
-    .about-desc {
-        padding: 2rem;
-    }
-
-    .about-desc-title {
-        font-size: 3.5rem;
-        letter-spacing: .3px;
-        margin-bottom: 1.5rem;
-        text-transform: capitalize;
-    }
-    .about-desc p {
+    p {
         font-size: 1.7rem;
         letter-spacing: .3px;
         line-height: 1.7;
         text-align: left;
     }
 
-    .about-desc img {
+    img {
         width: 100%;
     }
 </style>

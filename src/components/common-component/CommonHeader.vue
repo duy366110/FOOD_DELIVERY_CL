@@ -55,7 +55,8 @@
                     if(status) {
                         this.$store.commit('signout');
                         this.$store.commit('toggleLoader');
-                        window.location.reload();
+                        this.$router.push("/");
+                        // window.location.reload();
                     }
                 })
             }

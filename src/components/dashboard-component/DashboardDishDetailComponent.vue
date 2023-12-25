@@ -1,21 +1,23 @@
 <template>
     <div class="dashboard-dish-detail-component">
         <CommonBanner :banner="banner" />
-        <div class="container-fluid py-5">
-            <div class="row">
-                <div class="col-6">
-                    <div class="dish-detail-banner">
-                        <img :src="thumb" alt="thumbnail" />
+        <div class="container-fluid pt-5 mt-5">
+            <div class="container-wrapper">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="dish-detail-banner">
+                            <img :src="thumb" alt="thumbnail" />
+                        </div>
                     </div>
-                </div>
-                <div class="col-6">
-                    <div class="dish-detail-infor">
-                        <h2 class="dish-detail-infor_title">{{ dish.title }}</h2>
-                        <h3 class="dish-detail-infor_price">
-                            <span>Đơn giá:</span>
-                            <span>{{ dish.price?.$numberDecimal }} VND</span>
-                        </h3>
-                        <CommonButton :title="'Thêm vào hoá đơn'" @btnClick="addDishToOrder" />
+                    <div class="col-6">
+                        <div class="dish-detail-infor">
+                            <h2 class="dish-detail-infor_title">{{ dish.title }}</h2>
+                            <h3 class="dish-detail-infor_price">
+                                <span>Đơn giá:</span>
+                                <span>{{ dish.price?.$numberDecimal }} VND</span>
+                            </h3>
+                            <CommonButton :title="'Thêm vào hoá đơn'" @btnClick="addDishToOrder" />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -54,7 +56,6 @@
                 await http(url, "GET", null, (information) => {
                     let { status, metadata} = information;
                     if(status) {
-                        console.log(metadata.dish);
                         this.thumb = metadata.dish.thumbs[0];
                         Object.assign(this.dish, metadata.dish);
                         this.$store.commit('toggleLoader');
@@ -74,7 +75,6 @@
 
                     await http(url, "POST", payload, (information) => {
                         let { status} = information;
-                        console.log(information);
                         if(status) {
                             this.$store.commit('toggleLoader');
                             this.$router.push("/order");

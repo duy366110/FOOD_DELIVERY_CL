@@ -44,6 +44,7 @@
     font-size: 3.5rem;
     letter-spacing: .3px;
     margin-bottom: 1.5rem;
+    text-align: left;
     text-transform: capitalize;
   }
 

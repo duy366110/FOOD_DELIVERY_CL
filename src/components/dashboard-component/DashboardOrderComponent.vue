@@ -3,9 +3,13 @@
         <CommonBanner :banner="banner"/>
         <div class="container pt-5 mt-5">
             <div class="container-wrapper bg-gray">
-                <h2 class="container-title">Danh mục hoá đơn</h2>
+                <h2 v-if="order" class="container-title">Danh mục hoá đơn</h2>
                 <CommonBlankMessage v-if="!order" :message="'Đơn hàng hiện trống'" />
-                <CommonTable v-if="order" :type="'Order'" :data="order"/>
+                <CommonTable
+                    @onDangerHandler="onCancelOrder"
+                    v-if="order"
+                    :type="'Order'"
+                    :data="order"/>
             </div>
         </div>
     </div>
@@ -51,9 +55,23 @@
                         this.$store.commit('toggleLoader');
                     }
                 })
+            },
+            async onCancelOrder(event) {
+                this.$store.commit('toggleLoader');
+                let url = `${environment.api.url}${environment.api.order.cancel}`;
+                let payload = {order: event};
+
+                await http(url, "POST", payload, (information) => {
+                    let { status} = information;
+                    if(status) {
+                        this.$store.commit('toggleLoader');
+                        window.location.reload();
+                    }
+                })
             }
         }
     }
 </script>
 
-<style scoped></style>
+<style scoped>
+</style>

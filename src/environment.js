@@ -12,6 +12,7 @@ const environment = {
             order: {
                 root: "order",
                 dish: "order/dish",
+                cancel: "order/cancel",
             },
             access: {
                 signin: "common/access/signin",
@@ -32,6 +33,7 @@ const environment = {
             order: {
                 root: "order",
                 dish: "order/dish",
+                cancel: "order/cancel",
             },
             access: {
                 signin: "common/access/signin",

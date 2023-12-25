@@ -35,4 +35,19 @@
   a:hover {
     text-decoration: none!important;
   }
+
+  .container-wrapper {
+    padding: 2rem;
+  }
+
+  .container-title {
+    font-size: 3.5rem;
+    letter-spacing: .3px;
+    margin-bottom: 1.5rem;
+    text-transform: capitalize;
+  }
+
+  .bg-gray {
+    background-color: #f9f9f9;
+  }
 </style>

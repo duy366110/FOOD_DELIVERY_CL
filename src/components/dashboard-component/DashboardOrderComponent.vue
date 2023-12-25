@@ -1,8 +1,13 @@
 <template>
     <div class="dashboard-order-component">
         <CommonBanner :banner="banner"/>
-        <CommonBlankMessage v-if="!order" :message="'Đơn hàng hiện trống'" />
-        <CommonTable v-if="order" :type="'Order'" :data="order"/>
+        <div class="container pt-5 mt-5">
+            <div class="container-wrapper bg-gray">
+                <h2 class="container-title">Danh mục hoá đơn</h2>
+                <CommonBlankMessage v-if="!order" :message="'Đơn hàng hiện trống'" />
+                <CommonTable v-if="order" :type="'Order'" :data="order"/>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -29,7 +34,11 @@
             }
         },
         created() {
-            this.loadUserOrder();
+            if(this.$store.state.auth.accessToken) {
+                this.loadUserOrder();
+            } else {
+                this.$router.push("/");
+            }
         },
         methods: {
             async loadUserOrder() {
@@ -38,7 +47,6 @@
                 await http(url, "GET", null, (information) => {
                     let { status, metadata} = information;
                     if(status) {
-                        console.log(metadata);
                         this.order = metadata.order;
                         this.$store.commit('toggleLoader');
                     }
@@ -48,5 +56,4 @@
     }
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

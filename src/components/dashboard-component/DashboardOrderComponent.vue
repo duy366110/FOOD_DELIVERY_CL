@@ -7,9 +7,11 @@
                 <CommonBlankMessage v-if="!order" :message="'Đơn hàng hiện trống'" />
                 <CommonTable
                     @onDangerHandler="onCancelOrder"
+                    @onPrimaryHandler="onTransactionOrder"
                     v-if="order"
                     :type="'Order'"
-                    :data="order"/>
+                    :data="order"
+                    />
             </div>
         </div>
     </div>
@@ -60,6 +62,19 @@
                 this.$store.commit('toggleLoader');
                 let url = `${environment.api.url}${environment.api.order.cancel}`;
                 let payload = {order: event};
+
+                await http(url, "POST", payload, (information) => {
+                    let { status} = information;
+                    if(status) {
+                        this.$store.commit('toggleLoader');
+                        window.location.reload();
+                    }
+                })
+            },
+            async onTransactionOrder(event) {
+                this.$store.commit('toggleLoader');
+                let url = `${environment.api.url}${environment.api.transaction.root}`;
+                let payload = {user: this.$store.state.auth._id, order: event};
 
                 await http(url, "POST", payload, (information) => {
                     let { status} = information;

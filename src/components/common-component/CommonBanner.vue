@@ -20,6 +20,9 @@
                 this.title = "Món ăn";
             } else if(this.$route.path.includes('/order')) {
                 this.title = "Delivery";
+            } else if(this.$route.path.includes('/transaction')) {
+                this.title = "Giao dịch";
+
             } else {
                 this.title = "Giới thiệu";
             }

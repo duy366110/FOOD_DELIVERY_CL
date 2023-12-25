@@ -15,6 +15,9 @@
                             <li v-if="$store.state.auth.accessToken">
                                 <router-link to="/order">Delivery</router-link>
                             </li>
+                            <li v-if="$store.state.auth.accessToken">
+                                <router-link to="/transaction">Giao dịch</router-link>
+                            </li>
                         </ul>
 
                         <ul class="header-list">                            
@@ -56,7 +59,6 @@
                         this.$store.commit('signout');
                         this.$store.commit('toggleLoader');
                         this.$router.push("/");
-                        // window.location.reload();
                     }
                 })
             }

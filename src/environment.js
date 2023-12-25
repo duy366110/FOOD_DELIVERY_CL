@@ -18,6 +18,9 @@ const environment = {
                 signin: "common/access/signin",
                 signout: "common/access/signout",
                 signup: "common/access/signup",
+            },
+            transaction: {
+                root: "transaction"
             }
         }
     },
@@ -39,6 +42,9 @@ const environment = {
                 signin: "common/access/signin",
                 signout: "common/access/signout",
                 signup: "common/access/signup",
+            },
+            transaction: {
+                root: "transaction"
             }
         }
     }

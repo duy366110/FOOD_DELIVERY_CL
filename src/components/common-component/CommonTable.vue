@@ -42,7 +42,11 @@
                                 @btnClick="onDangerHandler(data._id)"
                                 :type="'danger'"
                                 :title="'Huỷ hoá đơn'"/>
-                            <CommonButton :type="'primary'" :title="'Thanh toán'" />
+
+                            <CommonButton
+                                @btnClick="onPrimaryHandler(data._id)"
+                                :type="'primary'"
+                                :title="'Thanh toán'"/>
                         </td>
                     </tr>
                 </tbody>
@@ -70,6 +74,9 @@
         methods: {
             onDangerHandler(event) {
                 this.$emit('onDangerHandler', event);
+            },
+            onPrimaryHandler(event) {
+                this.$emit('onPrimaryHandler', event);
             }
         }
     }

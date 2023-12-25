@@ -61,7 +61,7 @@
             async onCancelOrder(event) {
                 this.$store.commit('toggleLoader');
                 let url = `${environment.api.url}${environment.api.order.cancel}`;
-                let payload = {order: event};
+                let payload = {user: this.$store.state.auth._id, order: event};
 
                 await http(url, "POST", payload, (information) => {
                     let { status} = information;

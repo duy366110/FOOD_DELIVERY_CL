@@ -3,8 +3,8 @@
         <CommonBanner :banner="banner" />
 
         <div class="container pt-5 mt-5" v-if="categories.length > 0">
-            <div class="menu-element-wrapper py-5" v-for="(category, index) in categories" :key="category._id">
-                <div class="row" :class="{'wrapper-reverse': 2 % index == 0}">
+            <div class="menu-element-wrapper py-5" v-for="(category) in categories" :key="category._id">
+                <div class="row" :class="{'wrapper-reverse': category.reverse}">
                     <div class="col-6">
                         <div class="menu-banner">
                             <img :src="category.thumbs[0]" alt="thumbnail" />
@@ -65,8 +65,14 @@
                 let url = `${environment.api.url}${environment.api.category.root}`;
                 await http(url, "GET", null, (information) => {
                     let { status, metadata} = information;
+
                     if(status) {
-                        this.categories = metadata.categories;
+                        console.log(metadata.categories);
+
+                        this.categories = metadata.categories.map((category, index) => {
+                            category.reverse = (index % 2 !== 0)? true : false;
+                            return category;
+                        })
                         this.$store.commit('toggleLoader');
                     }
                 })

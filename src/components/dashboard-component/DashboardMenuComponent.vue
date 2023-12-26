@@ -30,7 +30,7 @@
             </div>
         </div>
 
-        <div class="container-fluid" v-if="categories.length <= 0">
+        <div class="container-fluid pt-5 mt-5" v-if="categories.length <= 0">
             <CommonBlankMessage :message="'Danh mục menu chưa cập nhật'" />
         </div>
     </div>

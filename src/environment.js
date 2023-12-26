@@ -50,4 +50,4 @@ const environment = {
     }
 }
 
-export default environment['pro']; // dev
+export default environment['dev']; // pro

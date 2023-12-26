@@ -13,7 +13,7 @@
                     </div>
                     <div class="col-6">
                         <div class="row">
-                            <div class="col-12" v-for="dish in category.dishs" :key="dish._id">
+                            <div class="col-12 mb-5" v-for="dish in category.dishs" :key="dish._id">
                                 <router-link :to="'/dish/'+dish._id" class="menu-dish">
                                     <div class="menu-dish-infor">
                                         <img :src="dish.thumbs[0]" alt="thumbs" />
@@ -82,11 +82,13 @@
 
     /** BANNER */
     .menu-banner {
+        height: 100%;
         position: relative;
     }
 
     .menu-banner img {
         filter: brightness(0.95);
+        height: 100%;
         width: 100%;
     }
 

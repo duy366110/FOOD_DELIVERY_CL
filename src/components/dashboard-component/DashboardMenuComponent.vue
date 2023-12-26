@@ -2,7 +2,7 @@
     <div class="dashboard-menu-component">
         <CommonBanner :banner="banner" />
 
-        <div class="container-fluid pt-5 mt-5" v-if="categories.length > 0">
+        <div class="container pt-5 mt-5" v-if="categories.length > 0">
             <div class="menu-element-wrapper py-5" v-for="(category, index) in categories" :key="category._id">
                 <div class="row" :class="{'wrapper-reverse': 2 % index == 0}">
                     <div class="col-6">

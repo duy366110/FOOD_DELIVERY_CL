@@ -80,10 +80,12 @@
                 }
             },
             onBlurEmail(event) {
-               this.valid.email = serviceValidation(event.target.value, ["require"]);
+               this.valid.email = serviceValidation(event.target.value, ["require", "email"]);
+               this.form.email = event.target.value;
             },
             onBlurPass(event) {
-                this.valid.password = serviceValidation(event.target.value, ["require"]);
+                this.valid.password = serviceValidation(event.target.value, ["require", "password"]);
+                this.form.password = event.target.value;
             }
         }
     }

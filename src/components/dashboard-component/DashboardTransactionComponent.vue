@@ -52,12 +52,17 @@
                 this.$store.commit('toggleLoader');
                 let url = `${environment.api.url}${environment.api.transaction.root}/${this.$store.state.auth._id}`;
                 await http(url, "GET", null, (information) => {
-                    let { status, metadata} = information;
+                    let { status, message, metadata} = information;
                     if(status) {
-                        console.log(metadata);
                         this.transactions = metadata.transactions;
-                        this.$store.commit('toggleLoader');
+                        
+                    } else {
+                        this.$store.commit("toggleMessage", message);
+                        setTimeout(() => {
+                            this.$store.commit("toggleMessage", "");
+                        }, 2500)
                     }
+                    this.$store.commit('toggleLoader');
                 })
             },
         }

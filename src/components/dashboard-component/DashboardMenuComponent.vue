@@ -64,17 +64,21 @@
                 this.$store.commit('toggleLoader');
                 let url = `${environment.api.url}${environment.api.category.root}`;
                 await http(url, "GET", null, (information) => {
-                    let { status, metadata} = information;
+                    let { status, message, metadata} = information;
 
                     if(status) {
-                        console.log(metadata.categories);
-
                         this.categories = metadata.categories.map((category, index) => {
                             category.reverse = (index % 2 !== 0)? true : false;
                             return category;
                         })
-                        this.$store.commit('toggleLoader');
+                        
+                    } else {
+                        this.$store.commit("toggleMessage", message);
+                        setTimeout(() => {
+                            this.$store.commit("toggleMessage", "");
+                        }, 2500)
                     }
+                    this.$store.commit('toggleLoader');
                 })
             }
         }

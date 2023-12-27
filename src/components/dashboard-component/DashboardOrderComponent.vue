@@ -51,11 +51,17 @@
                 this.$store.commit('toggleLoader');
                 let url = `${environment.api.url}${environment.api.order.root}/${this.$store.state.auth._id}`;
                 await http(url, "GET", null, (information) => {
-                    let { status, metadata} = information;
+                    let { status, message, metadata} = information;
                     if(status) {
                         this.order = metadata.order;
                         this.$store.commit('toggleLoader');
+                    } else {
+                        this.$store.commit("toggleMessage", message);
+                        setTimeout(() => {
+                            this.$store.commit("toggleMessage", "");
+                        }, 2500)
                     }
+                    this.$store.commit('toggleLoader');
                 })
             },
             async onCancelOrder(event) {
@@ -64,11 +70,17 @@
                 let payload = {user: this.$store.state.auth._id, order: event};
 
                 await http(url, "POST", payload, (information) => {
-                    let { status} = information;
+                    let { status, message} = information;
+                    
                     if(status) {
-                        this.$store.commit('toggleLoader');
                         window.location.reload();
+                    } else {
+                        this.$store.commit("toggleMessage", message);
+                        setTimeout(() => {
+                            this.$store.commit("toggleMessage", "");
+                        }, 2500)
                     }
+                    this.$store.commit('toggleLoader');
                 })
             },
             async onTransactionOrder(event) {
@@ -77,11 +89,17 @@
                 let payload = {user: this.$store.state.auth._id, order: event};
 
                 await http(url, "POST", payload, (information) => {
-                    let { status} = information;
+                    let { status, message} = information;
+
                     if(status) {
-                        this.$store.commit('toggleLoader');
                         this.$router.push("/transaction");
+                    } else {
+                        this.$store.commit("toggleMessage", message);
+                        setTimeout(() => {
+                            this.$store.commit("toggleMessage", "");
+                        }, 2500)
                     }
+                    this.$store.commit('toggleLoader');
                 })
             }
         }

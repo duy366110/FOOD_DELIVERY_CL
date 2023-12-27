@@ -54,12 +54,18 @@
                 this.$store.commit('toggleLoader');
                 let url = `${environment.api.url}${environment.api.dish.root}/${this.$route.params.id}`;
                 await http(url, "GET", null, (information) => {
-                    let { status, metadata} = information;
+                    let { status, message, metadata} = information;
                     if(status) {
                         this.thumb = metadata.dish.thumbs[0];
                         Object.assign(this.dish, metadata.dish);
-                        this.$store.commit('toggleLoader');
+                        
+                    } else {
+                        this.$store.commit("toggleMessage", message);
+                        setTimeout(() => {
+                            this.$store.commit("toggleMessage", "");
+                        }, 2500)
                     }
+                    this.$store.commit('toggleLoader');
                 })
             },
             async addDishToOrder() {
@@ -74,11 +80,17 @@
                     }
 
                     await http(url, "POST", payload, (information) => {
-                        let { status} = information;
+                        let { status, message} = information;
                         if(status) {
-                            this.$store.commit('toggleLoader');
                             this.$router.push("/order");
+
+                        } else {
+                            this.$store.commit("toggleMessage", message);
+                            setTimeout(() => {
+                                this.$store.commit("toggleMessage", "");
+                            }, 2500)
                         }
+                        this.$store.commit('toggleLoader');
                     })
 
                 } else {

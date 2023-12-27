@@ -44,16 +44,19 @@
         </div>
         <p class="footer-copplyright">&copy; coppy right by duy366110@gmail.com</p>
         <CommonLoaderComponent />
+        <CommonMessageComponent />
     </footer>
 </template>
 
 <script>
-    import CommonLoaderComponent from "../common-component/CommonLoader.vue"
+    import CommonLoaderComponent from "../common-component/CommonLoader.vue";
+    import CommonMessageComponent from "./CommonMessage.vue";
 
     export default {
         name: "CommonFooter",
         components: {
-            CommonLoaderComponent
+            CommonLoaderComponent,
+            CommonMessageComponent
         }
     }
 </script>

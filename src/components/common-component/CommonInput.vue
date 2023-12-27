@@ -31,6 +31,8 @@
     }
     .input-message-error {
         color: #dc3545;
+        display: flex;
         font-size: 1.4rem;
+        text-align: left;
     }
 </style>

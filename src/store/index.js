@@ -23,6 +23,10 @@ export default createStore({
     },
     header: {
       status: false
+    },
+    message: {
+      status: false,
+      content: ""
     }
   },
   getters: {
@@ -55,6 +59,11 @@ export default createStore({
     // HEADER
     toggleHeader(state, payload) {
       state.header.status = payload;
+    },
+    // MESSAGE
+    toggleMessage(state, payload) {
+      state.message.content = payload;
+      state.message.status = !state.message.status;
     }
   },
   actions: {

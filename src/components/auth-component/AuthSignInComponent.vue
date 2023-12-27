@@ -70,12 +70,19 @@
                     this.$store.commit('toggleLoader');
                     let url = `${environment.api.url}${environment.api.access.signin}`;
                     await http(url, "POST", this.form, (information) => {
-                        let { status, metadata} = information;
+                        let { status, message, metadata} = information;
+
                         if(status) {
                             this.$store.commit('signin', metadata);
-                            this.$store.commit('toggleLoader');
                             this.$router.push("/");
+
+                        } else {
+                            this.$store.commit("toggleMessage", message);
+                            setTimeout(() => {
+                                this.$store.commit("toggleMessage", "");
+                            }, 2500)
                         }
+                        this.$store.commit('toggleLoader');
                     })
                 }
             },

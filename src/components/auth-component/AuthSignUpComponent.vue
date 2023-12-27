@@ -10,40 +10,45 @@
             <span>Đăng ký</span>
         </h2>
 
-        <div class="form-group">
-            <label class="form-label" for="full-name">Họ và tên</label>
-            <input
-                type="text" class="form-control"
-                id="full-name" v-model="form.fullName" />
-        </div>
+        <CommonInput
+            :label="'Họ và tên'"
+            :id="'user-fullname'"
+            :type="'text'"
+            :valid="valid.fullName"
+            ref="fullNameRef"
+            @onBlur="onBlurFullName"/>
 
-        <div class="form-group">
-            <label class="form-label" for="email">E-mail</label>
-            <input
-                type="email" class="form-control"
-                id="email" v-model="form.email" />
-        </div>
+        <CommonInput
+            :label="'E-mail'"
+            :id="'user-email'"
+            :type="'email'"
+            :valid="valid.email"
+            ref="emailRef"
+            @onBlur="onBlurEmail"/>
 
-        <div class="form-group">
-            <label class="form-label" for="password">Mật khẩu</label>
-            <input
-                type="password" class="form-control"
-                id="password" v-model="form.password" />
-        </div>
+        <CommonInput
+            :label="'Mật khẩu'"
+            :id="'user-password'"
+            :type="'password'"
+            :valid="valid.password"
+            ref="passwordRef"
+            @onBlur="onBlurPass"/>
 
-        <div class="form-group">
-            <label class="form-label" for="phone">Số điện thoại</label>
-            <input
-                type="phone" class="form-control"
-                id="phone" v-model="form.phone" />
-        </div>
+        <CommonInput
+            :label="'Số điện thoại'"
+            :id="'user-phone'"
+            :type="'phone'"
+            :valid="valid.phone"
+            ref="phoneRef"
+            @onBlur="onBlurPhone"/>
 
-        <div class="form-group">
-            <label class="form-label" for="address">Địa chỉ</label>
-            <input
-                type="text" class="form-control"
-                id="address" v-model="form.address"/>
-        </div>
+        <CommonInput
+            :label="'Địa chỉ'"
+            :id="'user-address'"
+            :type="'text'"
+            :valid="valid.address"
+            ref="addressRef"
+            @onBlur="onBlurAddress"/>
 
         <button type="submit" class="btn w-100 btn-custom">Đăng ký</button>
         <p class="form-sugget"><span>Bạn chưa có tài khoản?</span> <router-link to="/auth">đăng nhập</router-link></p>
@@ -53,13 +58,18 @@
 </template>
 
 <script>
+    import CommonInput from "../common-component/CommonInput.vue";
     import serviceHttp from "@/services/service-http";
+    import serviceValidation from "@/services/service-validator";
     import environment from "@/environment";
 
     const { http } = serviceHttp();
 
     export default {
         name: "AuthSignUpComponent",
+        components: {
+            CommonInput
+        },
         data() {
             return {
                 form: {
@@ -68,23 +78,79 @@
                     password: "",
                     phone: "",
                     address: ""
+                },
+                valid: {
+                    fullName: {status: true, message: ""},
+                    email: {status: true, message: ""},
+                    password: {status: true, message: ""},
+                    phone: {status: true, message: ""},
+                    address: {status: true, message: ""},
                 }
             }
         },
         methods: {
             async signup() {
-                this.$store.commit('toggleLoader');
-                let url = `${environment.api.url}${environment.api.access.signup}`;
-                await http(url, "POST", this.form, (information) => {
-                    let { status, metadata} = information;
-                    if(status) {
-                        this.$store.commit('signin', metadata);
-                        this.$store.commit('toggleLoader');
-                        this.$router.push("/");
-                    }
-                })
+                let fullName = this.$refs.fullNameRef.$el.querySelector('#user-fullname');
+                let email = this.$refs.emailRef.$el.querySelector('#user-email');
+                let password = this.$refs.passwordRef.$el.querySelector('#user-password');
+                let phone = this.$refs.phoneRef.$el.querySelector('#user-phone');
+                let address = this.$refs.addressRef.$el.querySelector('#user-address');
 
-                console.log(this.form);
+                fullName.focus();
+                fullName.blur();
+
+                email.focus();
+                email.blur();
+
+                password.focus();
+                password.blur();
+
+                phone.focus();
+                phone.blur();
+
+                address.focus();
+                address.blur();
+
+                if(
+                    this.valid.fullName.status && this.valid.email.status &&
+                    this.valid.password.status && this.valid.phone.status &&
+                    this.valid.address.status
+                ) {
+                    this.$store.commit('toggleLoader');
+                    let url = `${environment.api.url}${environment.api.access.signup}`;
+
+                    await http(url, "POST", this.form, (information) => {
+                        let { status, metadata} = information;
+                        if(status) {
+                            this.$store.commit('signin', metadata);
+                            this.$router.push("/");
+                        } else {
+                            console.log("Dang ky khong thanh cong");
+                        }
+                        
+                        this.$store.commit('toggleLoader');
+                    })
+                }
+            },
+            onBlurFullName(event) {
+               this.valid.fullName = serviceValidation(event.target.value, ["require"]);
+               this.form.fullName = event.target.value;
+            },
+            onBlurEmail(event) {
+               this.valid.email = serviceValidation(event.target.value, ["require", "email"]);
+               this.form.email = event.target.value;
+            },
+            onBlurPass(event) {
+                this.valid.password = serviceValidation(event.target.value, ["require", "password"]);
+                this.form.password = event.target.value;
+            },
+            onBlurPhone(event) {
+               this.valid.phone = serviceValidation(event.target.value, ["require", "phone"]);
+               this.form.phone = event.target.value;
+            },
+            onBlurAddress(event) {
+                this.valid.address = serviceValidation(event.target.value, ["require"]);
+                this.form.address = event.target.value;
             }
         }
     }

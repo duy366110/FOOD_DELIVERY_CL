@@ -11,8 +11,13 @@ const serviceHttp = function() {
             body: payload? JSON.stringify(payload) : null
         })
 
-        if(!res.ok) throw new Error('Call api unsuccess');
-        cb(await res.json());
+        if(!res.ok) {
+            let infor = await res.json();
+            cb({status: false, message: infor.message});
+            
+        } else {
+            cb(await res.json());
+        }
     }
 
     return {

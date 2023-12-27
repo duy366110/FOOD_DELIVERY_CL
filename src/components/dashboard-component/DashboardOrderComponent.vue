@@ -54,7 +54,6 @@
                     let { status, message, metadata} = information;
                     if(status) {
                         this.order = metadata.order;
-                        this.$store.commit('toggleLoader');
                     } else {
                         this.$store.commit("toggleMessage", message);
                         setTimeout(() => {

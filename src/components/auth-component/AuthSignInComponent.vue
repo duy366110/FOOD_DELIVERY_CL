@@ -7,25 +7,19 @@
             <span>Đăng nhập</span>
         </h2>
 
-        <div class="form-group">
-            <label class="form-label" for="user-email">E-mail</label>
-            <input
-                type="email"
-                class="form-control"
-                id="user-email"
-                v-model="form.email"/>
-        </div>
+        <CommonInput
+            :label="'E-mail'"
+            :id="'user-email'"
+            :type="'email'"
+            :valid="valid.email"
+            @onBlur="onBlurEmail"/>
 
-        <div class="form-group">
-            <label class="form-label" for="user-password">Mật khẩu</label>
-            <input
-                type="password"
-                class="form-control"
-                id="user-password"
-                v-model="form.password"/>
-        </div>
-
-        <p>{{$store.state.auth.email}}</p>
+        <CommonInput
+            :label="'Mật khẩu'"
+            :id="'user-password'"
+            :type="'password'"
+            :valid="valid.password"
+            @onBlur="onBlurPass"/>
 
         <button type="submit" class="btn w-100 btn-custom">Đăng nhập</button>
         <p class="form-sugget"><span>Bạn chưa có tài khoản?</span> <router-link to="/auth/signup">đăng ký</router-link></p>
@@ -35,33 +29,53 @@
 </template>
 
 <script>
+    import CommonInput from "../common-component/CommonInput.vue";
     import serviceHttp from "@/services/service-http";
+    import serviceValidation from "@/services/service-validator";
     import environment from "@/environment";
 
     const { http } = serviceHttp();
 
     export default {
         name: "AuthSignInComponent",
+        components: {
+            CommonInput
+        },
         data() {
             return {
                 form: {
                     email: "",
                     password: ""
+                },
+                valid: {
+                    email: {status: true, message: ""},
+                    password: {status: true, message: ""},
                 }
             }
         },
         methods: {
             async signin() {
-                this.$store.commit('toggleLoader');
-                let url = `${environment.api.url}${environment.api.access.signin}`;
-                await http(url, "POST", this.form, (information) => {
-                    let { status, metadata} = information;
-                    if(status) {
-                        this.$store.commit('signin', metadata);
-                        this.$store.commit('toggleLoader');
-                        this.$router.push("/");
-                    }
-                })
+                if(this.form.email && this.form.password) {
+                    this.$store.commit('toggleLoader');
+                    let url = `${environment.api.url}${environment.api.access.signin}`;
+                    await http(url, "POST", this.form, (information) => {
+                        let { status, metadata} = information;
+                        if(status) {
+                            this.$store.commit('signin', metadata);
+                            this.$store.commit('toggleLoader');
+                            this.$router.push("/");
+                        }
+                    })
+
+                } else {
+                    console.log("Client khong the dang nhap");
+                }
+            },
+            onBlurEmail(event) {
+               this.valid.email = serviceValidation(event.target.value, ["require"]);
+            },
+            onBlurPass(event) {
+                this.valid.password = serviceValidation(event.target.value, ["require"]);
             }
         }
     }

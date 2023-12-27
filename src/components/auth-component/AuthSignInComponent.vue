@@ -12,6 +12,7 @@
             :id="'user-email'"
             :type="'email'"
             :valid="valid.email"
+            ref="emailRef"
             @onBlur="onBlurEmail"/>
 
         <CommonInput
@@ -19,6 +20,7 @@
             :id="'user-password'"
             :type="'password'"
             :valid="valid.password"
+            ref="passwordRef"
             @onBlur="onBlurPass"/>
 
         <button type="submit" class="btn w-100 btn-custom">Đăng nhập</button>
@@ -55,7 +57,16 @@
         },
         methods: {
             async signin() {
-                if(this.form.email && this.form.password) {
+                let email = this.$refs.emailRef.$el.querySelector('#user-email');
+                let password = this.$refs.passwordRef.$el.querySelector('#user-password');
+
+                email.focus();
+                email.blur();
+
+                password.focus();
+                password.blur();
+
+                if(this.valid.email.status && this.valid.password.status) {
                     this.$store.commit('toggleLoader');
                     let url = `${environment.api.url}${environment.api.access.signin}`;
                     await http(url, "POST", this.form, (information) => {
@@ -66,9 +77,6 @@
                             this.$router.push("/");
                         }
                     })
-
-                } else {
-                    console.log("Client khong the dang nhap");
                 }
             },
             onBlurEmail(event) {

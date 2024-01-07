@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-3">
                         <h1 class="header-logo">
-                            <router-link to="/">Food Delivery</router-link>
+                            <router-link to="/">FoodDelivery</router-link>
                         </h1>
                     </div>
                     <div class="col-9 d-flex align-items-center justify-content-between">

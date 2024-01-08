@@ -27,7 +27,9 @@ export default createStore({
     message: {
       status: false,
       content: ""
-    }
+    },
+    categories: [],
+    dishs: {}
   },
   getters: {
   },
@@ -64,6 +66,14 @@ export default createStore({
     toggleMessage(state, payload) {
       state.message.content = payload;
       state.message.status = !state.message.status;
+    },
+    // MENU
+    setInitCategory(state, payload) {
+      state.categories = payload;
+    },
+    updateDishInCategory(state, payload) {
+      let { category, menu: {dishs}} = payload;
+      state.dishs[category] = dishs;
     }
   },
   actions: {

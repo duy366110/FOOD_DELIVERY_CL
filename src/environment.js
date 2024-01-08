@@ -8,6 +8,7 @@ const environment = {
             },
             dish: {
                 root: "dish",
+                dishByCategoryId: "dish/category"
             },
             order: {
                 root: "order",
@@ -32,6 +33,7 @@ const environment = {
             },
             dish: {
                 root: "dish",
+                dishByCategoryId: "dish/category"
             },
             order: {
                 root: "order",

@@ -2,8 +2,13 @@
     <div class="dashboard-menu-component">
         <CommonBanner :banner="banner" />
 
-        <div class="container pt-5 mt-5" v-if="categories.length > 0">
-            <div class="menu-element-wrapper py-5" v-for="(category) in categories" :key="category._id">
+        
+        <div class="container pt-5 mt-5" ref="wrapperCategoryRef" v-if="categories.length > 0">
+            <div
+                class="menu-element-wrapper py-5 category-elm"
+                :ref="category._id"
+                :id="category._id"
+                v-for="(category) in categories" :key="category._id">
                 <div class="row" :class="{'wrapper-reverse': category.reverse}">
                     <div class="col-6">
                         <div class="menu-banner">
@@ -40,9 +45,11 @@
     import CommonBanner from "../common-component/CommonBanner.vue";
     import CommonBlankMessage from "../common-component/CommonBlankMessage.vue";
     import serviceHttp from "@/services/service-http";
+    import serviceLoadlazy from "../../services/service-loadlazy";
     import environment from "@/environment";
 
     const { http } = serviceHttp();
+    const { intersection } = serviceLoadlazy();
 
     export default {
         name: "DashboardMenuComponent",
@@ -58,6 +65,9 @@
         },
         mounted() {
             this.loadCategory();
+        },
+        updated() {
+            intersection(this.$refs.wrapperCategoryRef.children);
         },
         methods: {
             async loadCategory() {

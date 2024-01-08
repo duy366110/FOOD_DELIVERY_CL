@@ -53,8 +53,8 @@
     }
 
     .auth-component .form-wrappert .form-bg-top {
-        background-size: contain;
-        background-repeat: repeat;
+        background-size: cover;
+        background-repeat: no-repeat;
         height: 36px;
         display: block;
         left: 0px;
@@ -64,8 +64,8 @@
     }
 
     .auth-component .form-wrappert .form-bg-bottom {
-        background-size: contain;
-        background-repeat: repeat;
+        background-size: cover;
+        background-repeat: no-repeat;
         height: 36px;
         display: block;
         left: 0px;
